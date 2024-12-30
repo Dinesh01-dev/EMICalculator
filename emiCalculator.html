@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <script>
+        function AmountChange(){
+            document.getElementById("Amt").value=document.getElementById("sliderAmt").value;
+            
+        }
+        function YearChange(){
+            document.getElementById("txtyrs").value=document.getElementById("yearSlider").value;
+        }
+
+        function Intrestchange(){
+               document.getElementById("txtrate").value=document.getElementById("Intrate").value;
+        }
+
+        function Calculate(){
+
+            var P =parseInt(document.getElementById("Amt").value);
+            var R =parseFloat(document.getElementById("txtyrs").value)/12/100;
+            var N =parseInt(document.getElementById("txtrate").value)/12;
+            var EMI =P * R * (Math.pow(1+R),N)/(Math.pow(1+R),N)-1;
+            document.getElementById("Result").innerHTML="Monthly Payment :" +Math.round(EMI).toLocaleString('en-in',{style:"currency" ,currency:"INR"})
+        }
+    </script>
+
+
+
+</head>
+<body class="container-fluid bg-dark text-white"">
+    <div style="text-align: center">
+    <img src="https://logo-logos.com/2016/10/HDFC_Bank_logo.png" width="350" height="100" style=/>
+</div>
+    <h1 class="text-center">Personal Loan EMI Calculator</h1>
+    <div class="bg-light text-dark p-4 m-4">
+        <div class="row">
+        <div class="col">
+            Amount &#8377;<input type="text" id="Amt" onclick="AmountChange()">
+        </div>
+        <div class="col">
+           for<input type="text" id="txtyrs" size="4" onclick="YearChange()">years
+        </div>
+        <div class="col">
+            Intrest rate<input type="text" size="4" id="txtrate" onclick="Intrestchange()">%
+        </div>
+
+        <div class="row mt-4">
+            <div class="col">
+                 &#8377; 100000<input type="range" onchange="AmountChange()" id="sliderAmt" min="100000" max="300000" value="100000">300000
+            </div>
+            <div class="col">
+             1 <input type="range" onchange="YearChange()" id="yearSlider" min="1" max="5" value="1">5
+            </div>
+            <div class="col">
+                10.25<input type="range"  onchange="Intrestchange()" min="10.25" max="18.25" value="10.25" step="0.01" id="Intrate">18.25%
+            </div>
+
+          <div class="mt-4">
+            
+           <div class="col text-end">
+            <button class="btn btn-primary" onclick="Calculate()">Calculate</button>
+
+           </div>
+
+
+          </div>
+          <div class="mt-4">
+           <span class="h3" id="Result"></span>
+          </div>
+    
+    
+        </div>
+
+    </div>
+    
+    
+
+    
+
+    
+</body>
+</html>
